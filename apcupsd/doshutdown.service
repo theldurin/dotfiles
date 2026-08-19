@@ -1,0 +1,8 @@
+[Unit]
+Description=Scans apcupsd logs for shutdown events
+
+[Service]
+ExecStart=/home/thel/.local/bin/doshutdown.sh
+
+[Install]
+WantedBy=multi-user.target

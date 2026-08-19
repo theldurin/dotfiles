@@ -1,0 +1,43 @@
+su -
+sudo uname -a
+sudo apt install net-tools network-manager
+sudo apt update
+sudo apt install vim nfs-common nfs-kernel-server borgbackup apcupsd ufw fastfetch btop curl tmux
+sudo reboot
+
+# DOCKER
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo systemctl restart docker
+curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+sudo vi /etc/docker/daemon.json
+sudo systemctl restart docker
+
+# FIREWALL
+sudo ufw enable
+sudo ufw allow to 192.168.1.50 port 22 proto tcp comment "SSH"
+sudo ufw allow from 192.168.1.129 to 192.168.1.50 port nfs comment "NFS"
+sudo ufw allow to 192.168.1.50 port 9090 proto tcp comment "Web Cockpit"
+sudo ufw reload
+
+# NAS/NFS
+sudo mkdir -p /mnt/NAS
+sudo chown thel:thel /mnt/NAS
+mkdir -p /mnt/NAS/Server
+mkdir -p /mnt/NAS/Samba
+sudo mkdir -p /srv/Backups
+sudo chown thel:thel /srv/Backups
+sudo chmod 775 /srv/Backups
+sudo vi /etc/exports 
+sudo systemctl restart nfs-kernel-server
+
+
+sudo reboot
+
