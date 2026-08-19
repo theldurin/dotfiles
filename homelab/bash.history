@@ -2,7 +2,7 @@ su -
 sudo uname -a
 sudo apt install net-tools network-manager
 sudo apt update
-sudo apt install vim nfs-common nfs-kernel-server borgbackup apcupsd ufw fastfetch btop curl tmux
+sudo apt install vim nfs-common nfs-kernel-server ufw fastfetch btop curl tmux
 sudo reboot
 
 # DOCKER
@@ -22,9 +22,9 @@ sudo systemctl restart docker
 
 # FIREWALL
 sudo ufw enable
-sudo ufw allow to 192.168.1.50 port 22 proto tcp comment "SSH"
-sudo ufw allow from 192.168.1.129 to 192.168.1.50 port nfs comment "NFS"
-sudo ufw allow to 192.168.1.50 port 9090 proto tcp comment "Web Cockpit"
+sudo ufw allow to 10.10.1.50 port 22 proto tcp comment "SSH"
+sudo ufw allow from 10.10.1.129 to 10.10.1.50 port nfs comment "NFS"
+sudo ufw allow to 10.10.1.50 port 9090 proto tcp comment "Web Cockpit"
 sudo ufw reload
 
 # NAS/NFS
@@ -32,9 +32,9 @@ sudo mkdir -p /mnt/NAS
 sudo chown thel:thel /mnt/NAS
 mkdir -p /mnt/NAS/Server
 mkdir -p /mnt/NAS/Samba
-sudo mkdir -p /srv/Backups
-sudo chown thel:thel /srv/Backups
-sudo chmod 775 /srv/Backups
+mkdir -p /mnt/Storage/Backups
+sudo chown thel:thel /mnt/Storage/Backups
+sudo chmod 775 /mnt/Storage/Backups
 sudo vi /etc/exports 
 sudo systemctl restart nfs-kernel-server
 
