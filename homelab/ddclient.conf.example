@@ -1,0 +1,37 @@
+##
+## Define local variables for one or more hosts with:
+##      var=value [, var=value]* host.and.domain[,host2.and.domain...]
+
+pid=/var/run/ddclient.pid  # record PID in file.
+
+## WARNING: set deamon at least to 600 seconds if you use checkip or you could
+## get banned from their service.
+use=web, web=ipify-ipv4
+
+
+##
+## NameCheap (namecheap.com)
+##
+# protocol=namecheap,                     \
+# server=dynamicdns.park-your-domain.com, \
+# login=example.com,                      \
+# password=example.com-password           \
+# subdomain.example.com
+
+##
+## CloudFlare (www.cloudflare.com)
+##
+protocol=cloudflare,        \
+zone=thelstation.net,            \
+ttl=1,                      \
+login=token,     \
+password=             \ # This is either your global API key, or an API token. If you are using an API token, it must have the permissions "Zone - DNS - Edit" and "Zone - Zone - Read".
+*.thelstation.net,thelstation.net
+
+##
+## DigitalOcean (www.digitalocean.com)
+##
+# protocol=digitalocean, \
+# zone=example.com,      \
+# password=api-token     \
+# example.com,sub.example.com

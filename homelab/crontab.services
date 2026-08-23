@@ -35,4 +35,4 @@
 0 1 * * 0 rm -f /mnt/NAS/Server/data/Downloads/.magnets/*.torrent 2>&1 | logger -t magnetsweep
 
 # ddclient update DNS IP twice a month
-30 23 1,15 * * /usr/bin/ddclient -daemon=0 -syslog -quiet
+30 23 1,15 * * /usr/bin/ddclient -syslog -quiet
