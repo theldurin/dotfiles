@@ -56,21 +56,10 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;$\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -91,7 +80,6 @@ alias l='ls -CF'
 alias ..='cd ..'
 alias sudo='sudo '
 alias now='date +"%T"'
-alias lzd='lazydocker'
 alias python='python3'
 alias wake-server='sudo ether-wake -D 58:47:ca:7f:55:40'
 alias wake-htpc='sudo ether-wake -D a0:ad:9f:a1:c1:b8'
