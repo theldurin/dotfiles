@@ -80,8 +80,6 @@ fi
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-export HOMEBREW_NO_ENV_HINTS=1
-
 # Adding .local executables to PATH
 PATH=~/.local/bin:$PATH
 
@@ -95,6 +93,9 @@ alias sudo='sudo '
 alias now='date +"%T"'
 alias lzd='lazydocker'
 alias python='python3'
+alias wake-server='sudo ether-wake -D 58:47:ca:7f:55:40'
+alias wake-htpc='sudo ether-wake -D a0:ad:9f:a1:c1:b8'
+alias vi='vim'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -115,3 +116,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
