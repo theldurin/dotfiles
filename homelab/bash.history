@@ -6,12 +6,6 @@ sudo apt install vim nfs-common nfs-kernel-server ufw fastfetch btop curl tmux
 sudo reboot
 
 # DOCKER
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo groupadd docker
 sudo usermod -aG docker $USER
@@ -25,19 +19,16 @@ sudo ufw enable
 sudo ufw allow to 10.10.1.50 port 22 proto tcp comment "SSH"
 sudo ufw allow from 10.10.1.129 to 10.10.1.50 port nfs comment "NFS"
 sudo ufw allow to 10.10.1.50 port 9090 proto tcp comment "Web Cockpit"
+sudo ufw allow to 10.10.1.50 port 9323 proto tcp comment "Docker metrics"
 sudo ufw reload
 
 # NAS/NFS
 sudo mkdir -p /mnt/NAS
-sudo chown thel:thel /mnt/NAS
-mkdir -p /mnt/NAS/Server
-mkdir -p /mnt/NAS/Samba
+mkdir /mnt/NAS/Server
+mkdir /mnt/NAS/Samba
 mkdir -p /mnt/Storage/Backups
-sudo chown thel:thel /mnt/Storage/Backups
-sudo chmod 775 /mnt/Storage/Backups
 sudo vi /etc/exports 
 sudo systemctl restart nfs-kernel-server
 
 
 sudo reboot
-
