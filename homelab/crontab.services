@@ -22,9 +22,6 @@
 # 
 #  m h  dom mon dow   command
 
-# Project backups Mondays at 0400
-1 4 * * 1 /bin/bash /srv/thelstation/backups/auto-backup.sh
-
 # Nextcloud background tasks @ 5min
 */5 * * * * docker exec -u www-data nextcloud php /var/www/html/cron.php 2>&1 | logger -t nextcloud_cron
 
